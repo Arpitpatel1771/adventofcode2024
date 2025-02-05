@@ -18,7 +18,7 @@ class Map:
     def print(self):
         print(f"----------------------")
         for row in self.map:
-            print(" ".join(row))
+            print("".join(row))
         print(f"----------------------")
 
     def _extract_guard_info_from_map(self):
@@ -74,8 +74,11 @@ class Map:
         )
         self.guard_direction_vector = (dx, dy)
         self.guard_position = (gx0 + dx, gy0 + dy)
+        if self.map[gx0 + dx][gy0 + dy] == "#":
+            raise IndexError
+        print(f"guard moving to {gx0 + dx} {gy0 + dy}")
         self.map[gx0 + dx][gy0 + dy] = "X"
-        self.print()
+        # self.print()
 
     def start_simulation(self):
         while True:
@@ -100,3 +103,5 @@ map.print()
 map.start_simulation()
 
 print(map.count_guard_visited_spaces())
+
+map.print()
